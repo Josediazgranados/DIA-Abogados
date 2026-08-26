@@ -56,6 +56,7 @@ from reportlab.lib import colors
 
 from app import db
 from app.config import NOTIFY_MOCK as MOCK_MODE
+from app.services import notify
 
 STORAGE_DIR = Path(__file__).parent.parent / "storage"
 
@@ -90,20 +91,10 @@ def enviar_whatsapp_boton_remision(participante: dict) -> dict:
         proveedor_ref = f"wamid.MOCK-{db.new_id()[:12]}"
         return {"ok": True, "proveedor_ref": proveedor_ref}
 
-    # --- Integración real (ejemplo con Meta Cloud API / Twilio) ---
-    # POST https://graph.facebook.com/v20.0/<PHONE_NUMBER_ID>/messages
-    # {
-    #   "messaging_product": "whatsapp", "to": participante["celular"],
-    #   "type": "interactive",
-    #   "interactive": {
-    #       "type": "button",
-    #       "body": {"text": texto},
-    #       "action": {"buttons": [{"type": "reply",
-    #                    "reply": {"id": "confirmar_remision", "title": boton}}]}
-    #   }
-    # }
-    # El `id` del mensaje devuelto (wamid...) es el `proveedor_ref` a guardar.
-    raise NotImplementedError("Configurar Meta Cloud API / Twilio para mensajes interactivos")
+    respuesta = notify.enviar_whatsapp_boton(participante["celular"], texto, "confirmar_remision", boton)
+    # El `id` del mensaje devuelto por Meta (wamid...) es el `proveedor_ref` a guardar.
+    proveedor_ref = respuesta.get("messages", [{}])[0].get("id", "")
+    return {"ok": True, "proveedor_ref": proveedor_ref}
 
 
 def confirmar_whatsapp_boton(participante: dict, remision: dict, payload_webhook: dict,

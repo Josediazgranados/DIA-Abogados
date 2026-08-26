@@ -12,7 +12,17 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).parent
+
+# Carga automática de un archivo .env en la raíz del proyecto (si existe) —
+# así, para pruebas locales, basta con copiar .env.example a .env y poner
+# ahí las credenciales, sin tener que exportar variables de entorno a mano
+# en cada sesión de terminal. En Render (y otros hostings) esto no hace
+# nada: las variables ya vienen inyectadas por la plataforma, y load_dotenv
+# no sobreescribe las que ya existan en el entorno.
+load_dotenv(BASE_DIR.parent / ".env")
 STORAGE_DIR = BASE_DIR / "storage"
 
 DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{(STORAGE_DIR / 'casos.db').as_posix()}")
@@ -27,6 +37,18 @@ SMTP_ABOGADO_MOCK = os.environ.get("SMTP_ABOGADO_MOCK", "true").lower() == "true
 # de abrir el envío automático para el resto (0 = desactivada). Ver
 # app/services/peticion.py.
 REVISION_MANUAL_PRIMERAS_N = int(os.environ.get("REVISION_MANUAL_PRIMERAS_N", "0"))
+
+# --- Credenciales para envío REAL (solo se usan si NOTIFY_MOCK/SMTP_ABOGADO_MOCK
+# están en "false"; si faltan, notify.py lanza un error claro en vez de fallar
+# silenciosamente). Ver README.md, sección "Probar envíos reales". ---
+
+# WhatsApp — Meta Cloud API (WhatsApp Business Platform)
+META_WHATSAPP_TOKEN = os.environ.get("META_WHATSAPP_TOKEN", "")
+META_PHONE_NUMBER_ID = os.environ.get("META_PHONE_NUMBER_ID", "")
+
+# Correo — Gmail con contraseña de aplicación (smtp.gmail.com)
+GMAIL_USER = os.environ.get("GMAIL_USER", "")
+GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
 
 # Datos fijos de la campaña / caso (en producción vendrían de configuración
 # por caso, ya que una misma plataforma puede correr varias acciones de

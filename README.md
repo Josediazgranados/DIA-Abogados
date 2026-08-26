@@ -131,6 +131,61 @@ Postgres gratuita expira a los 90 días (Render avisa antes); para un uso
 más permanente, cambiar a un plan pago en cualquier momento sin tocar
 código.
 
+## Probar envíos reales (WhatsApp y correo)
+
+Por defecto el proyecto corre en **modo simulado** (`NOTIFY_MOCK=true`,
+`SMTP_ABOGADO_MOCK=true`): el código de WhatsApp/correo se imprime en la
+consola en vez de enviarse. Para probar el envío real, hace falta
+configurar dos proveedores:
+
+### 1. WhatsApp — Meta Cloud API
+
+1. Entra a [developers.facebook.com](https://developers.facebook.com/) con
+   tu cuenta de Facebook y crea una app de tipo **"Business"**.
+2. Dentro de la app, agrega el producto **"WhatsApp"**. Meta te da
+   automáticamente un **número de prueba** y un **token de acceso
+   temporal** (dura 24 horas — suficiente para probar; para algo más
+   permanente hay que generar un token de sistema, ver la documentación
+   de Meta).
+3. En esa misma pantalla copia:
+   - **Token de acceso** → `META_WHATSAPP_TOKEN`
+   - **Phone number ID** (no es el número de teléfono, es un ID numérico
+     que aparece justo debajo) → `META_PHONE_NUMBER_ID`
+4. **Importante**: con el número de prueba de Meta, solo puedes enviar
+   mensajes a números que agregues explícitamente en "To" →
+   **"Manage phone number list"** (hasta 5 números mientras la app esté en
+   modo desarrollo). Agrega ahí tu propio celular para poder recibir los
+   mensajes de prueba.
+
+### 2. Correo — Gmail con contraseña de aplicación
+
+1. En tu cuenta de Gmail, activa la verificación en dos pasos si no la
+   tienes (Configuración de la cuenta de Google → Seguridad).
+2. Ve a [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords),
+   crea una contraseña de aplicación nueva (ponle un nombre como "DIA
+   Abogados") y copia el código de 16 letras que te da — **esa** es
+   `GMAIL_APP_PASSWORD` (no la contraseña normal de tu cuenta).
+3. `GMAIL_USER` es tu dirección de Gmail completa.
+
+### 3. Configurar las credenciales
+
+**En Render** (para probar en el link público): panel del servicio →
+pestaña **"Environment"** → agrega `META_WHATSAPP_TOKEN`,
+`META_PHONE_NUMBER_ID`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, y cambia
+`NOTIFY_MOCK` y `SMTP_ABOGADO_MOCK` a `false`. Guarda — Render redespliega
+solo con las nuevas variables.
+
+**En local** (para probar antes de subir cambios): copia `.env.example` a
+`.env` en la raíz del proyecto, llena esos mismos valores, y pon
+`NOTIFY_MOCK=false` / `SMTP_ABOGADO_MOCK=false` ahí. El proyecto ya lo lee
+automáticamente al iniciar (no hace falta exportar nada a mano).
+
+**Nunca subas el archivo `.env` a GitHub** (ya está en `.gitignore`) ni
+compartas esas credenciales — quien las tenga puede enviar WhatsApp/correo
+en tu nombre. Si crees que se filtraron, revócalas desde Meta for
+Developers / desde `myaccount.google.com/apppasswords` y genera unas
+nuevas.
+
 ## Estructura
 
 ```
