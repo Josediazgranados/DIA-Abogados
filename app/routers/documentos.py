@@ -157,7 +157,13 @@ def verificar_otp(token: str, body: VerificarOtpBody, request: Request):
         resultados[tipo] = {"hash": sello["hash_sha256"], "pdf": sello["ruta_pdf"]}
 
     db.actualizar_participante(p["id"], estado="firmado")
-    notify.enviar_copia_firmada(p["email"], p["celular"], resultados["poder_especial"]["pdf"])
+    # La firma ya quedó sellada arriba; un fallo o demora del proveedor de
+    # correo/WhatsApp al enviar la copia de cortesía NO debe tumbar ni
+    # colgar la respuesta de la firma (que ya es válida sin esta copia).
+    try:
+        notify.enviar_copia_firmada(p["email"], p["celular"], resultados["poder_especial"]["pdf"])
+    except Exception:
+        db.registrar_evento(p["id"], "envio_copia_firmada_fallido", detalle={"pdf": resultados["poder_especial"]["pdf"]})
 
     # -----------------------------------------------------------
     # Paso 5, automático: dispara la opción 1 de la cascada de

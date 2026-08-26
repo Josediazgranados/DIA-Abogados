@@ -148,7 +148,7 @@ def _enviar_correo_gmail(destinatario: str, asunto: str, cuerpo_texto: str,
             msg.add_attachment(f.read(), maintype=maintype, subtype=subtype,
                                 filename=os.path.basename(adjunto_path))
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=15) as smtp:
         smtp.login(GMAIL_USER, GMAIL_APP_PASSWORD)
         smtp.send_message(msg)
 
