@@ -11,7 +11,7 @@ navLinks.querySelectorAll("a").forEach((a) => {
   a.addEventListener("click", () => navLinks.classList.remove("abierto"));
 });
 
-const secciones = ["inicio", "nosotros", "servicios", "experiencia", "blog", "contacto"]
+const secciones = ["inicio", "nosotros", "servicios", "contacto"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 
