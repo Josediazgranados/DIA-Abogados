@@ -1,0 +1,18 @@
+Coloca aquí las imágenes que va a usar la página (logos, íconos, fotos).
+
+Nombres que la página ya está buscando (si subes un archivo con ese
+nombre exacto, aparece solo en la página sin tocar código):
+
+  logo.png            -> logo de la firma, se muestra en el encabezado.
+                          Recomendado: fondo transparente, ~200x60px o proporción similar.
+
+  logo-footer.png      -> (opcional) logo alternativo para el pie de página,
+                          si quieres uno distinto al del encabezado.
+
+Si subes otras imágenes con nombres distintos (banner, equipo, oficina,
+etc.), avísame el nombre del archivo y en qué parte de la página quieres
+que aparezca, y yo agrego el código para mostrarla.
+
+Formatos recomendados: .png (con transparencia) o .jpg (fotos). Evita
+archivos muy pesados (lo ideal es menos de 500 KB por imagen) para que la
+página cargue rápido.

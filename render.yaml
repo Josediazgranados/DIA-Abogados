@@ -1,0 +1,43 @@
+# Blueprint de Render: define el servicio web (API + frontend juntos) y una
+# base de datos PostgreSQL gratuita para que los datos no se pierdan cuando
+# el servicio se reinicia (el disco de un Web Service en Render NO es
+# persistente entre despliegues).
+#
+# Cómo usarlo: en Render, "New +" -> "Blueprint" -> conecta este repositorio.
+# Render lee este archivo solo y crea ambos recursos automáticamente.
+# Ver README.md, sección "Desplegar en Render".
+services:
+  - type: web
+    name: dia-abogados
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dia-abogados-db
+          property: connectionString
+      - key: NOTIFY_MOCK
+        value: "true"
+      - key: SMTP_ABOGADO_MOCK
+        value: "true"
+      # Datos del caso/apoderado que se muestran en los documentos generados.
+      # Cambia estos valores por los reales (o edítalos luego en el panel de
+      # Render, pestaña "Environment", sin tener que tocar código).
+      - key: APODERADO_NOMBRE
+        value: "Nombre del abogado apoderado"
+      - key: APODERADO_TP
+        value: "T.P. No. 000000"
+      - key: APODERADO_EMAIL_RNA
+        value: "apoderado@firma.com"
+      - key: APODERADO_DOCUMENTO
+        value: "0000000"
+      - key: CIUDAD_CASO
+        value: "Bogotá D.C."
+
+databases:
+  - name: dia-abogados-db
+    plan: free
+    databaseName: dia_abogados
+    user: dia_abogados

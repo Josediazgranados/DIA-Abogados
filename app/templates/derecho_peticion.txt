@@ -1,0 +1,62 @@
+Señores
+{{ secretaria_nombre }}
+{{ secretaria_correo }}
+Referencia: DERECHO DE PETICIÓN — nulidad de comparendo(s) impuesto(s) mediante fotodetección (SAST) y devolución de lo pagado
+
+Respetados señores:
+
+Yo, {{ apoderado_nombre }}, identificado con cédula de ciudadanía No. {{ apoderado_documento }} y portador de la Tarjeta Profesional de Abogado No. {{ apoderado_tarjeta_profesional }}, obrando en calidad de apoderado especial de {{ nombre_completo }}, identificado(a) con cédula de ciudadanía No. {{ numero_documento }}, según poder especial que se adjunta y que se otorgó como mensaje de datos de conformidad con el artículo 6 de la Ley 2213 de 2022, presento respetuosamente ante ustedes DERECHO DE PETICIÓN, de conformidad con el artículo 23 de la Constitución Política y los artículos 13 y siguientes de la Ley 1755 de 2015 (CPACA), con fundamento en los siguientes:
+
+HECHOS
+
+1. El Ministerio de Transporte, en ejercicio de sus competencias de inspección, vigilancia y control, declaró la nulidad de los comparendos impuestos mediante el Sistema Automático/Autónomo de Sanción de Tránsito (SAST — fotodetección) operado por {{ secretaria_nombre }}, en el periodo correspondiente a su operación.
+
+2. Mi poderdante, {{ nombre_completo }}, es titular y/o afectado(a) directo(a) del(los) siguiente(s) comparendo(s) impuesto(s) mediante ese sistema, por dicha entidad:
+{% for c in comparendos %}
+{{ loop.index }}. Comparendo No. {{ c.numero_comparendo }}, de fecha {{ c.fecha_comparendo or "no informada" }}, impuesto al vehículo de placa {{ c.placa }} ({{ c.tipo_vehiculo or "tipo no informado" }}), a nombre de {{ c.titular_nombre }}, identificado(a) con {{ c.titular_documento }}.
+{% endfor %}
+
+3. Los comparendos relacionados se encuentran comprendidos dentro de la declaratoria de nulidad referida, por lo que corresponde a la entidad reconocer dicha nulidad respecto de cada uno de ellos y adoptar las medidas consecuentes.
+
+PETICIONES
+
+Con fundamento en los hechos expuestos, respetuosamente solicito:
+
+PRIMERA: Reconocer expresamente la nulidad del(los) comparendo(s) relacionado(s) en el hecho 2, de conformidad con la decisión del Ministerio de Transporte.
+
+SEGUNDA: Ordenar la devolución de la totalidad de las sumas de dinero que, en su caso, hayan sido pagadas por mi poderdante con ocasión del(los) comparendo(s) anulado(s), junto con los intereses y/o ajustes a que haya lugar.
+
+TERCERA: Eliminar cualquier anotación, reporte o antecedente derivado del(los) comparendo(s) anulado(s) que repose en las bases de datos de la entidad (incluyendo el Registro Único Nacional de Tránsito — RUNT, si aplica) a nombre de mi poderdante.
+
+CUARTA: Informar por escrito, dentro del término legal, la respuesta a cada una de las peticiones anteriores.
+
+FUNDAMENTOS DE DERECHO
+
+Artículo 23 de la Constitución Política; artículos 13 a 33 de la Ley 1755 de 2015 (Código de Procedimiento Administrativo y de lo Contencioso Administrativo, Título II); artículo 74 del Código General del Proceso y artículo 6 de la Ley 2213 de 2022, en cuanto al poder que sustenta esta actuación; y la decisión del Ministerio de Transporte que declaró la nulidad de los comparendos impuestos mediante el sistema SAST operado por la entidad destinataria de esta petición.
+
+NOTIFICACIONES
+
+Toda comunicación y notificación relacionada con la presente petición, así como con la eventual demanda o acción judicial subsiguiente, deberá dirigirse EXCLUSIVAMENTE al siguiente correo electrónico del apoderado, autorizado expresamente para tal efecto por el poderdante en el poder especial adjunto:
+
+{{ apoderado_email_rna }}
+
+De conformidad con el artículo 14 de la Ley 1755 de 2015, solicito que la respuesta a la presente petición sea emitida dentro de los quince (15) días hábiles siguientes a su recepción, o dentro del término que corresponda según la naturaleza de la solicitud.
+
+Anexos: (i) poder especial otorgado por {{ nombre_completo }}, con constancia de firma electrónica; (ii) los que la entidad estime pertinente requerir para el trámite.
+
+Cordialmente,
+
+_________________________________
+{{ apoderado_nombre }}
+C.C. {{ apoderado_documento }}
+T.P. No. {{ apoderado_tarjeta_profesional }}
+Apoderado de {{ nombre_completo }}, C.C. {{ numero_documento }}
+
+Ciudad y fecha: {{ ciudad }}, {{ fecha }}
+
+--- CONSTANCIA DE ENVÍO (se anexa automáticamente al remitirse) ---
+Documento identificado con huella: {{ hash_documento }}
+Enviado el: {{ fecha_envio }}
+Remitido desde el correo del apoderado: {{ apoderado_email_rna }}
+Destinatario: {{ secretaria_correo }}
+Identificador de mensaje (proveedor de correo): {{ proveedor_ref }}

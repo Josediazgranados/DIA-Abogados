@@ -1,0 +1,27 @@
+# --- Stack actual (arquitectura recomendada por firma-poderes/README.md,
+#     sección "De prototipo a producción") ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+sqlalchemy>=2.0
+python-multipart>=0.0.9
+jinja2>=3.1
+reportlab>=4.0
+pillow>=10.0
+
+# --- Para verificar (demo.py usa TestClient de FastAPI) ---
+httpx>=0.27
+
+# --- Para producción con PostgreSQL (basta con exportar DATABASE_URL) ---
+# Incluida siempre (no solo comentada): en hosting como Render el disco
+# NO es persistente entre despliegues/reinicios, así que ahí SIEMPRE hace
+# falta Postgres para no perder los datos — ver README, sección "Desplegar".
+psycopg2-binary>=2.9        # o asyncpg si se usa SQLAlchemy async
+
+# --- Pendiente: integraciones reales (requieren credenciales que aún no
+#     existen) y procesamiento asíncrono para picos de miles de invitaciones.
+#     Ver README.md, sección "Próximos pasos". ---
+# celery>=5.3
+# redis>=5.0
+# twilio>=9.0                 # WhatsApp Business API (OTP y envío de enlaces)
+# sendgrid>=6.11               # correo transaccional (OTP y copias firmadas)
+# boto3>=1.34                 # almacenamiento S3-compatible cifrado

@@ -1,0 +1,43 @@
+CONTRATO DE PRESTACIÓN DE SERVICIOS PROFESIONALES
+
+Entre los suscritos, {{ apoderado_nombre }}, identificado con cédula de
+ciudadanía No. {{ apoderado_documento }} y Tarjeta Profesional de
+Abogado No. {{ apoderado_tarjeta_profesional }}, quien en adelante se
+denominará EL CONTRATISTA, y {{ nombre_completo }}, identificado(a) con
+cédula de ciudadanía No. {{ numero_documento }}, quien en adelante se
+denominará EL CLIENTE, hemos convenido celebrar el presente contrato de
+prestación de servicios profesionales, regido por las siguientes
+cláusulas:
+
+PRIMERA. OBJETO: EL CONTRATISTA prestará sus servicios profesionales de
+representación judicial a EL CLIENTE dentro de la ACCIÓN DE GRUPO
+relacionada con: {{ descripcion_caso }}, respecto de el(los) siguiente(s)
+comparendo(s): {% for c in comparendos %}No. {{ c.numero_comparendo }} (placa {{ c.placa }}, {{ c.secretaria_nombre or "organismo no informado" }}){% if not loop.last %}, {% endif %}{% else %}[sin comparendos registrados]{% endfor %}.
+
+SEGUNDA. HONORARIOS: {{ clausula_honorarios }}
+
+TERCERA. OBLIGACIONES: EL CONTRATISTA se obliga a representar
+diligentemente los intereses de EL CLIENTE. EL CLIENTE se obliga a
+suministrar la información y documentación necesaria para el trámite.
+
+CUARTA. VIGENCIA: El presente contrato estará vigente durante el
+trámite de la acción de grupo referida y hasta su terminación
+definitiva, incluyendo eventuales recursos.
+
+QUINTA. ACEPTACIÓN ELECTRÓNICA: Las partes aceptan que este contrato se
+suscribe por medios electrónicos, de conformidad con la Ley 527 de 1999
+y el Decreto 2364 de 2012, siendo la firma electrónica aquí registrada
+plenamente válida y vinculante.
+
+Ciudad y fecha: {{ ciudad }}, {{ fecha }}
+
+_________________________________            _________________________________
+{{ apoderado_nombre }}                         {{ nombre_completo }}
+EL CONTRATISTA                                 EL CLIENTE
+                                                C.C. {{ numero_documento }}
+
+--- CONSTANCIA DE FIRMA ELECTRÓNICA (se anexa automáticamente al firmar) ---
+Documento identificado con huella: {{ hash_documento }}
+Firmado electrónicamente el: {{ fecha_firma }}
+Canal de verificación: {{ canal_verificacion }}
+Identificador de evento de auditoría: {{ id_evento_firma }}

@@ -1,0 +1,48 @@
+PODER ESPECIAL, AMPLIO Y SUFICIENTE
+
+Yo, {{ nombre_completo }}, mayor de edad, identificado(a) con cédula de
+ciudadanía No. {{ numero_documento }}, obrando en nombre propio, por medio
+del presente documento confiero PODER ESPECIAL, tan amplio y suficiente
+como en derecho se requiera, al abogado {{ apoderado_nombre }}, portador
+de la Tarjeta Profesional No. {{ apoderado_tarjeta_profesional }}, para
+que me represente judicial y extrajudicialmente dentro de la ACCIÓN DE
+GRUPO relacionada con: {{ descripcion_caso }}.
+
+Este poder se refiere específicamente al(los) siguiente(s) comparendo(s)
+impuesto(s) mediante fotodetección, cuya nulidad fue declarada por el
+Ministerio de Transporte:
+{% for c in comparendos %}
+{{ loop.index }}. Comparendo No. {{ c.numero_comparendo }}, de fecha {{ c.fecha_comparendo or "no informada" }}, impuesto al vehículo de placa {{ c.placa }} ({{ c.tipo_vehiculo or "tipo no informado" }}) por {{ c.secretaria_nombre or "organismo de tránsito no informado" }}, a nombre de {{ c.titular_nombre }}, identificado(a) con {{ c.titular_documento }}.
+{% else %}
+[No se registraron comparendos — este poder no debería firmarse sin al menos uno]
+{% endfor %}
+
+El apoderado queda facultado, de manera especial, para: presentar la
+demanda y sus reformas; conciliar; recibir; transigir; desistir;
+sustituir el poder; y en general, realizar todas las actuaciones
+necesarias para la defensa de mis intereses dentro del proceso referido,
+de conformidad con el artículo 74 del Código General del Proceso.
+
+Correo electrónico judicial del apoderado (Registro Nacional de Abogados):
+{{ apoderado_email_rna }}
+
+Para efectos de notificaciones, el poderdante señala:
+Correo electrónico: {{ email }}
+Celular: {{ celular }}
+
+Este poder se otorga y se remite como mensaje de datos, de conformidad
+con el artículo 6 de la Ley 2213 de 2022 y la Ley 527 de 1999, y se
+entiende auténtico con la sola antefirma del poderdante.
+
+Ciudad y fecha: {{ ciudad }}, {{ fecha }}
+
+_________________________________
+{{ nombre_completo }}
+C.C. {{ numero_documento }}
+(Antefirma / firma electrónica — ver constancia de firma electrónica anexa)
+
+--- CONSTANCIA DE FIRMA ELECTRÓNICA (se anexa automáticamente al firmar) ---
+Documento identificado con huella: {{ hash_documento }}
+Firmado electrónicamente el: {{ fecha_firma }}
+Canal de verificación: {{ canal_verificacion }}
+Identificador de evento de auditoría: {{ id_evento_firma }}

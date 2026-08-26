@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Firma de poder especial — Acción de grupo fotocomparendos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <!-- Coloca tu logo en frontend/assets/imagenes/logo.png y aparece aquí solo.
+         Si el archivo no existe todavía, este <img> se oculta automáticamente. -->
+    <img id="logo-firma" class="logo" src="assets/imagenes/logo.png" alt="Logo de la firma"
+         onerror="this.style.display='none'" />
+    <h1>Vinculación a la acción de grupo</h1>
+    <p class="subtitulo">Fotocomparendos declarados nulos por el Ministerio de Transporte</p>
+  </header>
+
+  <nav class="progreso" id="progreso">
+    <div class="paso-indicador" data-paso="1"><span class="circulo">1</span><span class="etiqueta">Datos</span></div>
+    <div class="paso-indicador" data-paso="2"><span class="circulo">2</span><span class="etiqueta">Comparendo(s)</span></div>
+    <div class="paso-indicador" data-paso="3"><span class="circulo">3</span><span class="etiqueta">Identidad</span></div>
+    <div class="paso-indicador" data-paso="4"><span class="circulo">4</span><span class="etiqueta">Revisión</span></div>
+    <div class="paso-indicador" data-paso="5"><span class="circulo">5</span><span class="etiqueta">Firma</span></div>
+    <div class="paso-indicador" data-paso="6"><span class="circulo">6</span><span class="etiqueta">Remisión</span></div>
+  </nav>
+
+  <main class="contenedor">
+    <div id="alerta" class="alerta oculto"></div>
+
+    <!-- Paso 1: datos básicos -->
+    <section class="paso" id="paso-1">
+      <h2>1. Tus datos básicos</h2>
+      <form id="form-datos">
+        <label>Nombre completo
+          <input type="text" name="nombre_completo" required autocomplete="name" />
+        </label>
+        <label>Número de cédula
+          <input type="text" name="numero_documento" required autocomplete="off" />
+        </label>
+        <label>Correo electrónico
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <label>Celular (con indicativo, ej. +57...)
+          <input type="tel" name="celular" required autocomplete="tel" />
+        </label>
+        <button type="submit">Continuar</button>
+      </form>
+    </section>
+
+    <!-- Paso 2: comparendo(s) -->
+    <section class="paso oculto" id="paso-2">
+      <h2>2. Comparendo(s) que quieres incluir</h2>
+      <p class="ayuda">Puedes agregar más de uno si tienes varios comparendos o vehículos.</p>
+      <div id="lista-comparendos"></div>
+      <button type="button" id="btn-agregar-comparendo" class="secundario">+ Agregar otro comparendo</button>
+      <button type="button" id="btn-continuar-comparendos">Continuar</button>
+    </section>
+
+    <!-- Paso 3: identidad -->
+    <section class="paso oculto" id="paso-3">
+      <h2>3. Verificación de identidad</h2>
+      <p class="ayuda">Sube una foto de tu cédula y una selfie tuya.</p>
+      <form id="form-identidad">
+        <label>Foto de la cédula
+          <input type="file" name="foto_cedula" accept="image/*" capture="environment" required />
+        </label>
+        <label>Selfie
+          <input type="file" name="selfie" accept="image/*" capture="user" required />
+        </label>
+        <button type="submit">Continuar</button>
+      </form>
+    </section>
+
+    <!-- Paso 4: revisión de documentos -->
+    <section class="paso oculto" id="paso-4">
+      <h2>4. Revisa tus documentos</h2>
+      <p class="ayuda">Léelos antes de aceptar. Al aceptar te enviaremos un código de confirmación.</p>
+      <div class="documentos-links">
+        <a id="link-poder" href="#" target="_blank" rel="noopener">📄 Ver poder especial (borrador)</a>
+        <a id="link-contrato" href="#" target="_blank" rel="noopener">📄 Ver contrato de prestación de servicios (borrador)</a>
+      </div>
+      <label class="checkbox">
+        <input type="checkbox" id="check-acepto" />
+        He leído y acepto los documentos anteriores
+      </label>
+      <div class="canal-otp">
+        <span>Recibir código por:</span>
+        <label><input type="radio" name="canal" value="whatsapp" checked /> WhatsApp</label>
+        <label><input type="radio" name="canal" value="email" /> Correo</label>
+      </div>
+      <button type="button" id="btn-aceptar" disabled>Aceptar y enviar código</button>
+    </section>
+
+    <!-- Paso 5: OTP -->
+    <section class="paso oculto" id="paso-5">
+      <h2>5. Confirma con el código</h2>
+      <p class="ayuda" id="texto-otp-canal">Te enviamos un código de 6 dígitos.</p>
+      <form id="form-otp">
+        <label>Código de verificación
+          <input type="text" name="codigo" inputmode="numeric" maxlength="6" required />
+        </label>
+        <button type="submit">Confirmar y firmar</button>
+      </form>
+    </section>
+
+    <!-- Paso 6: firma sellada + remisión -->
+    <section class="paso oculto" id="paso-6">
+      <h2>6. ¡Firma completada!</h2>
+      <div class="resultado-firma" id="resultado-firma"></div>
+
+      <h3>Remisión certificada</h3>
+      <p class="ayuda">
+        Para dejar constancia de que remites tu firma, confirma por uno de estos canales:
+      </p>
+      <div id="estado-remision" class="estado-remision"></div>
+
+      <div id="acciones-remision" class="acciones-remision"></div>
+
+      <a href="index.html" class="btn-volver-inicio">← Volver al inicio</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-empresa">
+      <div class="footer-col">
+        <h4>Datos de la firma</h4>
+        <p><strong>Razón social:</strong> <span class="pendiente">(pendiente)</span></p>
+        <p><strong>NIT:</strong> <span class="pendiente">(pendiente)</span></p>
+        <p><strong>Dirección:</strong> <span class="pendiente">(pendiente)</span></p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p><strong>Teléfono:</strong> <span class="pendiente">(pendiente)</span></p>
+        <p><strong>Correo electrónico:</strong> <span class="pendiente">(pendiente)</span></p>
+        <p><strong>Horario de atención:</strong> <span class="pendiente">(pendiente)</span></p>
+      </div>
+    </div>
+
+    <small>Prototipo DIA Abogados — modo de prueba (OTP y notificaciones simuladas)</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
