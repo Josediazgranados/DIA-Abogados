@@ -285,13 +285,32 @@ document.getElementById("btn-aceptar").addEventListener("click", async (e) => {
       resultado.canal === "whatsapp"
         ? "Te enviamos un código de 6 dígitos por WhatsApp."
         : "Te enviamos un código de 6 dígitos por correo.";
-    mostrarAlerta(
-      "Modo de prueba: el código no llega de verdad — revisa la consola donde corre el servidor (uvicorn), ahí aparece impreso.",
-      "info"
-    );
+    document.querySelector('#form-otp input[name="codigo"]').value = "";
     irAPaso(5);
   } catch (err) {
     mostrarAlerta(`No se pudo enviar el código: ${err.message}`);
+  } finally {
+    boton.disabled = false;
+  }
+});
+
+document.getElementById("btn-reenviar-otp").addEventListener("click", async (e) => {
+  const boton = e.target;
+  const canal = document.querySelector('input[name="canal"]:checked').value;
+  boton.disabled = true;
+  try {
+    const resultado = await llamar(`/api/participantes/${state.token}/aceptar`, {
+      method: "POST",
+      body: JSON.stringify({ canal }),
+    });
+    document.getElementById("texto-otp-canal").textContent =
+      resultado.canal === "whatsapp"
+        ? "Te enviamos un nuevo código de 6 dígitos por WhatsApp."
+        : "Te enviamos un nuevo código de 6 dígitos por correo.";
+    document.querySelector('#form-otp input[name="codigo"]').value = "";
+    mostrarAlerta("Código reenviado.", "exito");
+  } catch (err) {
+    mostrarAlerta(`No se pudo reenviar el código: ${err.message}`);
   } finally {
     boton.disabled = false;
   }
