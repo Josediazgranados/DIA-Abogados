@@ -78,13 +78,14 @@ def _font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
 def enviar_whatsapp_boton_remision(participante: dict) -> dict:
     """
     Envía el documento firmado por WhatsApp Business API con un botón de
-    respuesta rápida "Confirmo y remito mi firma".
+    respuesta rápida "Confirmo y remito".
     """
     texto = (
         f"Hola {participante['nombre_completo']}, adjunto tu poder especial ya firmado. "
         f"Para dejar constancia de que lo recibes y lo remites como tuyo, toca el botón."
     )
-    boton = "Confirmo y remito mi firma"
+    # Meta exige título de botón de máximo 20 caracteres (error 131009 si se excede).
+    boton = "Confirmo y remito"
 
     if MOCK_MODE:
         print(f"[MOCK][WhatsApp interactivo -> {participante['celular']}] {texto}\n    [Botón: {boton}]")
