@@ -3,121 +3,168 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIA Abogados — Acción de grupo por fotocomparendos</title>
+  <title>DIA de Infraestructura Abogados — Derecho de Infraestructura e intereses colectivos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="home.css" />
 </head>
 <body>
   <header class="dia-nav">
     <div class="dia-nav-inner">
       <a href="index.html" class="dia-logo">
-        <img src="assets/imagenes/DIA-8.png" alt="DIA Abogados" />
+        <span class="dia-logo-dia">DIA</span>
+        <span class="dia-logo-sub">DE INFRAESTRUCTURA<br />ABOGADOS</span>
       </a>
       <nav class="dia-nav-links" id="dia-nav-links">
         <a href="#inicio">INICIO</a>
-        <a href="#nosotros">NOSOTROS</a>
-        <a href="#servicios">SERVICIOS</a>
-        <a href="#contacto">CONTACTO</a>
+        <a href="#quienes-somos">QUIÉNES SOMOS</a>
+        <a href="#especialidad">NUESTRA ESPECIALIDAD</a>
+        <a href="#casos">CASOS / LITIGIOS</a>
+        <a href="#accion-grupo">ACCIÓN DE GRUPO</a>
       </nav>
       <!-- Abre el panel de contacto por temas (ver #panel-hablemos más abajo)
            en vez de navegar a otra página. -->
-      <button type="button" id="btn-hablemos" class="btn-hablemos">HABLEMOS</button>
+      <button type="button" id="btn-hablemos" class="btn-hablemos">CONTÁCTANOS</button>
       <button type="button" class="dia-nav-toggle" id="dia-nav-toggle" aria-label="Abrir menú">☰</button>
     </div>
   </header>
 
   <section class="dia-hero" id="inicio">
-    <div class="dia-hero-inner">
-      <p class="dia-eyebrow">ESTRATEGIA LEGAL QUE CONSTRUYE CONFIANZA</p>
-      <h1>DIA Infraestructura de Abogados</h1>
+    <div class="dia-hero-texto-col">
+      <h1>Especialistas en Derecho de Infraestructura <span class="dia-acento-texto">e intereses colectivos.</span></h1>
       <p class="dia-hero-texto">
-        Te representamos en la acción de grupo por los comparendos impuestos
-        mediante fotodetección, declarados nulos por el Ministerio de
-        Transporte. Firma tu poder en minutos, sin costos iniciales.
+        Asesoría jurídica y litigios especializados.
       </p>
-      <a href="firma.html" class="btn-cta-grande">
-        <span class="btn-cta-icono">📝</span>
-        <span>COMENZAR MI RECLAMO AHORA</span>
-        <span class="btn-cta-flecha">→</span>
-      </a>
-      <p class="dia-hero-ayuda">👆 Toca aquí para llenar el formulario. Toma solo unos minutos, desde tu celular.</p>
+      <a href="#quienes-somos" class="btn-outline-acento">CONOCE MÁS</a>
+    </div>
+    <div class="dia-hero-img-col">
+      <img src="assets/imagenes/hero-autopista-noche.jpg" alt="Infraestructura vial" />
     </div>
   </section>
 
-  <section class="dia-enfoque" id="nosotros">
-    <p class="dia-eyebrow dia-centrado">NUESTRO ENFOQUE</p>
-    <h2 class="dia-centrado">Asesoría legal cercana,<br />con visión estratégica y resultados.</h2>
+  <section class="dia-quienes-somos" id="quienes-somos">
+    <div class="dia-quienes-somos-texto">
+      <p class="dia-eyebrow">QUIÉNES SOMOS</p>
+      <h2>Especialistas en Derecho de Infraestructura</h2>
+      <p>Somos una firma especializada en Derecho de Infraestructura, con enfoque en asesoría y litigios.</p>
+      <p>Nuestra práctica aborda diferentes asuntos relacionados con la infraestructura, desde el análisis jurídico de situaciones específicas hasta la representación de nuestros clientes en los procesos correspondientes.</p>
+      <p>Contamos además con experiencia en el análisis y desarrollo de mecanismos de defensa colectiva, cuando una misma problemática puede involucrar a múltiples afectados.</p>
+      <p>Nuestro enfoque combina conocimiento especializado, análisis jurídico y estrategia para abordar cada caso de acuerdo con sus particularidades.</p>
+      <a href="#especialidad" class="btn-relleno-acento">CONOCE MÁS</a>
+    </div>
+    <div class="dia-quienes-somos-img">
+      <img src="assets/imagenes/balanza-justicia.jpg" alt="Balanza de la justicia" />
+    </div>
+  </section>
 
-    <div class="dia-enfoque-grid">
-      <div class="dia-enfoque-item">
-        <svg viewBox="0 0 48 48" class="dia-icono"><path d="M14 42V10a2 2 0 012-2h16a2 2 0 012 2v32" /><path d="M10 42h28" /><path d="M20 16h8M20 22h8M20 28h8M20 34h4" /></svg>
-        <h3>ESTRATEGIA</h3>
-        <p>Anticipamos riesgos y diseñamos soluciones legales a la medida de cada caso.</p>
+  <section class="dia-especialidad" id="especialidad">
+    <p class="dia-eyebrow dia-centrado">NUESTRA ESPECIALIDAD</p>
+    <h2 class="dia-centrado">Derecho de Infraestructura</h2>
+
+    <div class="dia-especialidad-grid">
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M10 40L20 8h8l10 32" /><path d="M16 40l4-12h8l4 12" /></svg>
+        <h3>Infraestructura vial</h3>
+        <p>Asuntos jurídicos relacionados con vías, sistemas y elementos asociados a la infraestructura vial.</p>
       </div>
-      <div class="dia-enfoque-item">
-        <svg viewBox="0 0 48 48" class="dia-icono"><path d="M14 6h14l8 8v28a2 2 0 01-2 2H14a2 2 0 01-2-2V8a2 2 0 012-2z" /><path d="M28 6v8h8" /><path d="M18 24h12M18 30h12M18 36h8" /></svg>
-        <h3>EXPERIENCIA</h3>
-        <p>Conocemos a fondo la normativa de tránsito y el proceso de las acciones de grupo.</p>
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M8 42h20" /><path d="M14 42V18l16-10v14" /><path d="M30 22l10-4v24h-6" /><path d="M14 30h8M14 36h8" /></svg>
+        <h3>Construcción</h3>
+        <p>Litigios y asesoría relacionados con construcciones, obras y las relaciones jurídicas que surgen alrededor de ellas.</p>
       </div>
-      <div class="dia-enfoque-item">
-        <svg viewBox="0 0 48 48" class="dia-icono"><path d="M4 34h40" /><path d="M12 34V16M24 34V8M36 34V16" /><path d="M4 22c8-6 12-6 20 0s12 6 20 0" /></svg>
-        <h3>RESULTADOS</h3>
-        <p>Buscamos resultados concretos: la devolución de lo pagado y la reparación de tus perjuicios.</p>
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M8 42V20l16-12 16 12v22" /><path d="M8 42h32" /><path d="M20 42V28h8v14" /></svg>
+        <h3>Bienes</h3>
+        <p>Análisis de asuntos jurídicos relacionados con bienes que pueden verse involucrados o afectados en contextos de infraestructura.</p>
       </div>
-      <div class="dia-enfoque-item">
-        <svg viewBox="0 0 48 48" class="dia-icono"><path d="M4 20l10-8 8 6 4-4 10 8-2 4-8-6-4 4-10-8z" /><path d="M8 22l10 10 6-6" /><path d="M30 20l8 8-4 6" /></svg>
-        <h3>CONFIANZA</h3>
-        <p>Trabajamos como aliados, con ética, transparencia y compromiso contigo.</p>
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M24 6c-6 6-6 14 0 20 6-6 6-14 0-20z" /><path d="M24 26v16" /><path d="M6 42h36" /></svg>
+        <h3>Tierras</h3>
+        <p>Asuntos relacionados con terrenos y situaciones jurídicas vinculadas al desarrollo o impacto de infraestructura.</p>
+      </div>
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M10 42V22l14-10 14 10v20" /><path d="M22 30h4v12h-4z" /><path d="M6 42h36" /></svg>
+        <h3>Mobiliario</h3>
+        <p>Situaciones jurídicas relacionadas con elementos, bienes y mobiliario asociados a espacios, obras o infraestructura.</p>
+      </div>
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M8 42V16l16-8 16 8v26" /><path d="M14 42V24M24 42V24M34 42V24" /><path d="M6 16h36" /></svg>
+        <h3>Obras y proyectos</h3>
+        <p>Asesoría y litigios derivados de situaciones jurídicas relacionadas con obras y proyectos de infraestructura.</p>
+      </div>
+      <div class="dia-especialidad-item">
+        <svg viewBox="0 0 48 48" class="dia-icono-acento"><path d="M14 6h14l6 6v30a2 2 0 01-2 2H14a2 2 0 01-2-2V8a2 2 0 012-2z" /><path d="M28 6v6h6" /><path d="M18 24h12M18 30h12M18 36h8" /></svg>
+        <h3>Actuaciones administrativas relacionadas</h3>
+        <p>Análisis y representación frente a actuaciones de entidades y autoridades relacionadas con asuntos de infraestructura.</p>
       </div>
     </div>
   </section>
 
-  <section class="dia-servicios" id="servicios">
-    <p class="dia-eyebrow dia-centrado">SERVICIOS</p>
-    <h2 class="dia-centrado">Nuestros servicios</h2>
-    <p class="dia-centrado pendiente">(pendiente — se agregará aquí el listado de servicios que ofrece la firma)</p>
-    <div class="dia-servicios-grid">
-      <div class="dia-servicio-item"><span class="pendiente">(pendiente)</span></div>
-      <div class="dia-servicio-item"><span class="pendiente">(pendiente)</span></div>
-      <div class="dia-servicio-item"><span class="pendiente">(pendiente)</span></div>
-      <div class="dia-servicio-item"><span class="pendiente">(pendiente)</span></div>
-      <div class="dia-servicio-item"><span class="pendiente">(pendiente)</span></div>
-      <div class="dia-servicio-item"><span class="pendiente">(pendiente)</span></div>
+  <section class="dia-casos" id="casos">
+    <p class="dia-eyebrow">CASOS / LITIGIOS</p>
+    <h2>Casos y litigios</h2>
+    <p class="dia-casos-intro">Conoce algunos de los procesos y acciones que hacen parte de nuestra práctica jurídica.</p>
+    <div class="dia-casos-grid">
+      <article class="dia-caso-card">
+        <div class="dia-caso-img dia-caso-img-1" role="img" aria-label="Demanda El Tarra"></div>
+        <div class="dia-caso-texto">
+          <p class="dia-caso-numero">CASO 01</p>
+          <h3>Demanda El Tarra</h3>
+          <div class="dia-caso-ficha">
+            <p class="dia-caso-lugar">EL TARRA</p>
+            <p><strong>Tipo de proceso:</strong> <span class="pendiente">(por confirmar)</span></p>
+            <p><strong>Área:</strong> Derecho de Infraestructura</p>
+            <p><strong>Estado:</strong> <span class="pendiente">(por confirmar)</span></p>
+          </div>
+          <a href="#" class="dia-caso-link">Conocer el caso →</a>
+        </div>
+      </article>
+      <article class="dia-caso-card">
+        <div class="dia-caso-img dia-caso-img-2" role="img" aria-label="Demanda por inundación en Bosconia"></div>
+        <div class="dia-caso-texto">
+          <p class="dia-caso-numero">CASO 02</p>
+          <h3>Demanda por inundación en Bosconia</h3>
+          <div class="dia-caso-ficha">
+            <p class="dia-caso-lugar">BOSCONIA</p>
+            <p><strong>Tipo de proceso:</strong> <span class="pendiente">(por confirmar)</span></p>
+            <p><strong>Área:</strong> Derecho de Infraestructura</p>
+            <p><strong>Estado:</strong> <span class="pendiente">(por confirmar)</span></p>
+          </div>
+          <a href="#" class="dia-caso-link">Conocer el caso →</a>
+        </div>
+      </article>
     </div>
   </section>
 
-  <div class="dia-foto-strip">
-    <div class="dia-foto-strip-item"><img src="assets/imagenes/hero-camara-transito.jpg" alt="Cámara de fotodetección en una vía" /></div>
-    <div class="dia-foto-strip-item"><img src="assets/imagenes/hero-autopista-noche.jpg" alt="Autopista de noche" /></div>
-    <div class="dia-foto-strip-item"><img src="assets/imagenes/balanza-justicia.jpg" alt="Balanza de la justicia" /></div>
-    <div class="dia-foto-strip-item"><img src="assets/imagenes/abogado-cliente-acuerdo.jpg" alt="Abogado y cliente llegando a un acuerdo" /></div>
-  </div>
+  <section class="dia-cta-grupo" id="accion-grupo">
+    <div class="dia-cta-grupo-inner">
+      <svg viewBox="0 0 48 48" class="dia-icono-cta"><circle cx="17" cy="16" r="6" /><circle cx="33" cy="16" r="5" /><path d="M6 40v-4a10 10 0 0110-10h2a10 10 0 0110 10v4" /><path d="M30 26h1a9 9 0 019 9v5" /></svg>
+      <div class="dia-cta-grupo-texto">
+        <h3>¿Quieres unirte a una acción de grupo específica?</h3>
+        <p class="dia-cta-grupo-subtitulo">Déjanos tus datos.</p>
+        <p>Si estás interesado en conocer si puedes hacer parte de una acción de grupo que estamos adelantando, completa el formulario correspondiente.</p>
+        <p>Analizaremos la información suministrada y verificaremos si tu caso cumple con las condiciones del proceso.</p>
+      </div>
+      <a href="firma.html" class="btn-relleno-acento dia-cta-grupo-btn">LLENAR FORMULARIO →</a>
+    </div>
+  </section>
 
   <footer class="dia-footer" id="contacto">
     <div class="dia-footer-inner">
-      <div class="dia-footer-col dia-footer-brand">
-        <img src="assets/imagenes/DIA-7.png" alt="DIA Abogados" class="dia-footer-logo" />
-        <p>Asesoría legal especializada en acciones de grupo y defensa de tus derechos. Cercanía, experiencia y compromiso contigo.</p>
+      <div class="dia-footer-brand">
+        <a href="index.html" class="dia-logo dia-logo-footer">
+          <span class="dia-logo-dia">DIA</span>
+          <span class="dia-logo-sub">DE INFRAESTRUCTURA<br />ABOGADOS</span>
+        </a>
+        <p>Especialistas en Derecho de Infraestructura e intereses colectivos.</p>
       </div>
-
-      <div class="dia-footer-col">
-        <h4>Enlaces</h4>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-
-      <div class="dia-footer-col">
-        <h4>Contáctanos</h4>
-        <p>✉️ <span class="pendiente">(pendiente)</span></p>
-        <p>📞 <span class="pendiente">(pendiente)</span></p>
-        <p>📍 <span class="pendiente">(pendiente)</span></p>
-        <div class="dia-footer-social">
-          <a href="#" class="pendiente" title="LinkedIn (pendiente)">in</a>
-          <a href="#" class="pendiente" title="Instagram (pendiente)">◎</a>
-        </div>
+      <div class="dia-footer-social">
+        <a href="#" class="pendiente" title="LinkedIn (pendiente)">in</a>
+        <a href="#" class="pendiente" title="Instagram (pendiente)">◎</a>
+        <a href="#" class="pendiente" title="Correo (pendiente)">✉</a>
       </div>
     </div>
-
     <p class="dia-copyright">© 2026 DIA Abogados. Todos los derechos reservados.</p>
   </footer>
 

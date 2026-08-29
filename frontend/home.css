@@ -1,232 +1,277 @@
 :root {
-  --dia-navy: #0f1f38;
-  --dia-navy-2: #16294a;
-  --dia-teal: #2f7f8f;
-  --dia-teal-light: #5fa8b8;
-  --dia-texto: #16233a;
+  --dia-navy: #14243f;
+  --dia-navy-2: #0d1a2e;
+  --dia-tan: #c9a06c;
+  --dia-tan-oscuro: #b3894f;
+  --dia-tan-claro: #e8d9c2;
+  --dia-texto: #1f2937;
   --dia-gris: #64748b;
-  --dia-bg-claro: #f4f6f8;
-  --dia-borde: #e2e6ea;
-  --dia-acento: #f5a623;
-  --dia-acento-sombra: rgba(245, 166, 35, 0.55);
+  --dia-crema: #f4efe6;
+  --dia-borde: #e6e1d6;
+  --dia-acento-sombra: rgba(201, 160, 108, 0.5);
+  --dia-fuente-titulo: "Lora", Georgia, "Times New Roman", serif;
+  --dia-fuente-texto: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: var(--dia-fuente-texto);
   color: var(--dia-texto);
   background: white;
 }
 
-h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
+h1, h2, h3 { font-family: var(--dia-fuente-titulo); font-weight: 600; line-height: 1.25; margin: 0; }
 
 .dia-centrado { text-align: center; }
-.dia-claro { color: white; }
 .pendiente { color: var(--dia-gris); font-style: italic; }
 
 .dia-eyebrow {
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--dia-teal);
+  letter-spacing: 0.14em;
+  color: var(--dia-tan-oscuro);
   margin: 0 0 0.6rem;
 }
+
+/* --- Logo (marca tipográfica: "DIA" + subtítulo apilado) --- */
+.dia-logo { display: flex; align-items: baseline; gap: 0.6rem; text-decoration: none; color: var(--dia-navy); }
+.dia-logo-dia { font-family: var(--dia-fuente-titulo); font-size: 1.7rem; font-weight: 700; letter-spacing: 0.02em; }
+.dia-logo-sub { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em; line-height: 1.35; color: var(--dia-gris); }
 
 /* --- Navegación --- */
 .dia-nav { background: white; border-bottom: 1px solid var(--dia-borde); position: sticky; top: 0; z-index: 10; }
 .dia-nav-inner {
-  max-width: 1180px;
+  max-width: 1220px;
   margin: 0 auto;
-  padding: 0.8rem 1.5rem;
+  padding: 0.9rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 2rem;
 }
-.dia-logo img { height: 40px; display: block; }
 .dia-nav-links { display: flex; gap: 1.6rem; margin-left: auto; }
 .dia-nav-links a {
   color: var(--dia-navy);
   text-decoration: none;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   padding-bottom: 0.3rem;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
 }
-.dia-nav-links a:hover, .dia-nav-links a.activo { border-color: var(--dia-teal); color: var(--dia-teal); }
+.dia-nav-links a:hover, .dia-nav-links a.activo { border-color: var(--dia-tan); color: var(--dia-tan-oscuro); }
 .btn-hablemos {
-  background: var(--dia-navy);
-  color: white;
+  background: var(--dia-tan);
+  color: var(--dia-navy);
   text-decoration: none;
   font-family: inherit;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  padding: 0.7rem 1.2rem;
+  padding: 0.75rem 1.3rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-hablemos:hover { background: var(--dia-tan-oscuro); }
+.dia-nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--dia-navy); }
+
+/* --- Botones reutilizables --- */
+.btn-outline-acento {
+  display: inline-block;
+  border: 1px solid var(--dia-tan);
+  color: var(--dia-tan);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.8rem;
+  border-radius: 50px;
+}
+.btn-outline-acento:hover { background: rgba(201, 160, 108, 0.12); }
+
+.btn-relleno-acento {
+  display: inline-block;
+  background: var(--dia-tan);
+  color: var(--dia-navy);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.8rem;
+  border-radius: 50px;
+  border: none;
   cursor: pointer;
 }
-.btn-hablemos:hover { background: var(--dia-navy-2); }
-.dia-nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--dia-navy); }
+.btn-relleno-acento:hover { background: var(--dia-tan-oscuro); }
 
 /* --- Hero --- */
 .dia-hero {
-  background-image:
-    linear-gradient(120deg, rgba(15,31,56,0.9) 0%, rgba(22,41,74,0.87) 55%, rgba(47,127,143,0.78) 140%),
-    url('assets/imagenes/hero-autopista-noche.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 5rem 1.5rem;
+  display: flex;
+  min-height: 460px;
+  background: var(--dia-navy);
   color: white;
 }
-.dia-hero-inner { max-width: 700px; margin: 0 auto; }
-.dia-hero .dia-eyebrow { color: var(--dia-teal-light); }
-.dia-hero h1 { font-size: 2.6rem; margin-bottom: 1.2rem; }
-.dia-hero-texto { font-size: 1rem; line-height: 1.6; opacity: 0.88; margin-bottom: 2rem; max-width: 480px; }
-.btn-outline {
-  display: inline-block;
-  border: 1px solid white;
+.dia-hero-texto-col {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3.5rem;
+}
+.dia-hero-texto-col h1 {
+  font-size: 2.3rem;
   color: white;
-  text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
+  margin-bottom: 1.3rem;
+  max-width: 480px;
 }
-.btn-outline:hover { background: rgba(255,255,255,0.12); }
+.dia-acento-texto { color: var(--dia-tan); }
+.dia-hero-texto { font-family: var(--dia-fuente-texto); font-size: 1rem; line-height: 1.6; opacity: 0.85; margin: 0 0 2rem; max-width: 420px; }
+.dia-hero-img-col { flex: 1 1 50%; overflow: hidden; }
+.dia-hero-img-col img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 460px; }
 
-/* --- Botón de llamado a la acción (grande, llamativo, pensado para
-   personas que no manejan bien la computadora: color fuerte, texto directo
-   ("comenzar"), ícono y una animación de pulso que atrae la mirada). --- */
-.btn-cta-grande {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  background: var(--dia-acento);
-  color: var(--dia-navy);
-  text-decoration: none;
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  padding: 1.1rem 2.1rem;
-  border-radius: 50px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  animation: dia-pulso 2.2s infinite;
+/* --- ¿Quiénes somos? --- */
+.dia-quienes-somos {
+  display: flex;
+  background: var(--dia-crema);
 }
-.btn-cta-grande:hover { filter: brightness(1.05); }
-.btn-cta-icono { font-size: 1.3rem; }
-.btn-cta-flecha { font-size: 1.3rem; font-weight: 900; }
+.dia-quienes-somos-texto {
+  flex: 1 1 50%;
+  padding: 4rem 3.5rem;
+}
+.dia-quienes-somos-texto h2 { font-size: 2rem; color: var(--dia-navy); margin-bottom: 1.2rem; }
+.dia-quienes-somos-texto p { font-family: var(--dia-fuente-texto); font-size: 0.95rem; line-height: 1.65; color: var(--dia-texto); max-width: 480px; margin: 0 0 1rem; }
+.dia-quienes-somos-texto .btn-relleno-acento { margin-top: 1rem; }
+.dia-quienes-somos-img { flex: 1 1 50%; min-height: 420px; overflow: hidden; }
+.dia-quienes-somos-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.dia-hero-ayuda {
-  margin: 0.9rem 0 0;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-}
-
-@keyframes dia-pulso {
-  0% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 0 var(--dia-acento-sombra); }
-  70% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 14px rgba(245, 166, 35, 0); }
-  100% { box-shadow: 0 4px 14px rgba(0,0,0,0.25), 0 0 0 0 rgba(245, 166, 35, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .btn-cta-grande { animation: none; }
-}
-
-/* --- Nuestro enfoque --- */
-.dia-enfoque { background: var(--dia-bg-claro); padding: 4.5rem 1.5rem; }
-.dia-enfoque h2 { font-size: 1.7rem; max-width: 640px; margin: 0 auto 3rem; color: var(--dia-navy); }
-.dia-enfoque-grid {
-  max-width: 1100px;
+/* --- Nuestra Especialidad --- */
+.dia-especialidad { background: #faf8f4; padding: 4.5rem 1.5rem; }
+.dia-especialidad h2 { font-size: 1.9rem; color: var(--dia-navy); margin-bottom: 3rem; }
+.dia-especialidad-grid {
+  max-width: 1220px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: 2.2rem 1.6rem;
 }
-.dia-enfoque-item { text-align: center; }
-.dia-icono { width: 44px; height: 44px; stroke: var(--dia-navy); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 1rem; }
-.dia-enfoque-item h3 { font-size: 0.85rem; letter-spacing: 0.05em; margin-bottom: 0.6rem; color: var(--dia-navy); }
-.dia-enfoque-item p { font-size: 0.85rem; color: var(--dia-gris); line-height: 1.55; margin: 0; }
+.dia-especialidad-item { text-align: center; }
+.dia-icono-acento { width: 42px; height: 42px; stroke: var(--dia-tan-oscuro); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 1rem; }
+.dia-especialidad-item h3 { font-size: 1rem; margin-bottom: 0.6rem; color: var(--dia-navy); }
+.dia-especialidad-item p { font-family: var(--dia-fuente-texto); font-size: 0.85rem; color: var(--dia-gris); line-height: 1.55; margin: 0; }
 
-/* --- Servicios (pendiente por definir) --- */
-.dia-servicios { background: white; padding: 4.5rem 1.5rem; border-top: 1px solid var(--dia-borde); }
-.dia-servicios h2 { font-size: 1.7rem; color: var(--dia-navy); margin-bottom: 0.6rem; }
-.dia-servicios > p.pendiente { margin: 0 0 2.5rem; }
-.dia-servicios-grid {
-  max-width: 1000px;
-  margin: 0 auto;
+/* --- Casos / Litigios --- */
+.dia-casos { background: white; padding: 4.5rem 1.5rem; max-width: 1220px; margin: 0 auto; }
+.dia-casos h2 { font-size: 1.9rem; color: var(--dia-navy); margin-bottom: 0.7rem; }
+.dia-casos-intro { font-family: var(--dia-fuente-texto); font-size: 0.95rem; color: var(--dia-gris); margin: 0 0 2.2rem; max-width: 560px; }
+.dia-casos-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
 }
-.dia-servicio-item {
-  border: 1px dashed var(--dia-borde);
+.dia-caso-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--dia-borde);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--dia-crema);
+}
+.dia-caso-img { min-height: 160px; background-size: cover; background-position: center; }
+.dia-caso-img-1 { background: linear-gradient(135deg, #7c8f7a, #4c5c4a); }
+.dia-caso-img-2 { background: linear-gradient(135deg, #5c7f9e, #2e4c63); }
+.dia-caso-texto { padding: 1.4rem 1.6rem 1.6rem; }
+.dia-caso-numero { font-family: var(--dia-fuente-texto); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: var(--dia-tan-oscuro); margin: 0 0 0.4rem; }
+.dia-caso-texto h3 { font-size: 1.2rem; color: var(--dia-navy); margin-bottom: 1rem; }
+.dia-caso-ficha {
+  background: white;
+  border: 1px solid var(--dia-borde);
   border-radius: 8px;
-  padding: 1.6rem 1rem;
-  text-align: center;
-  background: var(--dia-bg-claro);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.1rem;
 }
+.dia-caso-lugar { font-family: var(--dia-fuente-titulo); font-size: 1.1rem; font-weight: 700; color: var(--dia-navy); margin: 0 0 0.7rem; letter-spacing: 0.03em; }
+.dia-caso-ficha p { font-family: var(--dia-fuente-texto); font-size: 0.85rem; color: var(--dia-texto); line-height: 1.7; margin: 0; }
+.dia-caso-ficha strong { color: var(--dia-gris); font-weight: 600; }
+.dia-caso-link { color: var(--dia-tan-oscuro); text-decoration: none; font-size: 0.85rem; font-weight: 700; }
+.dia-caso-link:hover { text-decoration: underline; }
 
-/* --- Experiencia --- */
-.dia-experiencia { padding: 4.5rem 1.5rem; }
-.dia-experiencia h2 { font-size: 1.5rem; margin-bottom: 3rem; color: var(--dia-navy); }
-.dia-experiencia-grid {
-  max-width: 900px;
+/* --- CTA acción de grupo --- */
+.dia-cta-grupo { background: var(--dia-navy); padding: 3rem 1.5rem; }
+.dia-cta-grupo-inner {
+  max-width: 1220px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
 }
-.dia-experiencia-num { display: block; font-size: 1.6rem; font-weight: 700; color: var(--dia-teal); }
-.dia-experiencia-label { display: block; font-size: 0.8rem; color: var(--dia-gris); margin-top: 0.3rem; }
-
-/* --- Blog (placeholder) --- */
-.dia-blog { padding: 4rem 1.5rem; }
-.dia-blog h2 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--dia-navy); }
+.dia-icono-cta { flex: 0 0 auto; width: 44px; height: 44px; stroke: var(--dia-tan); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.dia-cta-grupo-texto { flex: 1 1 auto; }
+.dia-cta-grupo-texto h3 { font-size: 1.3rem; color: white; margin-bottom: 0.4rem; }
+.dia-cta-grupo-texto p.dia-cta-grupo-subtitulo { font-family: var(--dia-fuente-texto); font-size: 0.95rem; font-weight: 600; color: var(--dia-tan); margin: 0 0 0.7rem; }
+.dia-cta-grupo-texto p { font-family: var(--dia-fuente-texto); font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.55; margin: 0 0 0.5rem; max-width: 560px; }
+.dia-cta-grupo-texto p:last-child { margin-bottom: 0; }
+.dia-cta-grupo-btn { flex: 0 0 auto; white-space: nowrap; }
 
 /* --- Footer --- */
-.dia-footer { background: var(--dia-navy); color: rgba(255,255,255,0.75); padding: 3.5rem 1.5rem 1.5rem; }
+.dia-footer { background: var(--dia-navy-2); color: rgba(255,255,255,0.75); padding: 2.5rem 1.5rem 1.5rem; }
 .dia-footer-inner {
-  max-width: 1180px;
-  margin: 0 auto 2.5rem;
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1.4fr;
-  gap: 2rem;
+  max-width: 1220px;
+  margin: 0 auto 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
-.dia-footer-logo { height: 32px; margin-bottom: 0.8rem; }
-.dia-footer-brand p { font-size: 0.82rem; line-height: 1.6; margin: 0; max-width: 260px; }
-.dia-footer-col h4 { color: var(--dia-teal-light); font-size: 0.78rem; letter-spacing: 0.05em; margin: 0 0 0.9rem; text-transform: uppercase; }
-.dia-footer-col a, .dia-footer-col p { display: block; font-size: 0.82rem; margin: 0 0 0.55rem; }
-.dia-footer-col a { color: rgba(255,255,255,0.75); text-decoration: none; }
-.dia-footer-col a:hover { color: white; }
-.dia-footer-social { display: flex; gap: 0.7rem; margin-top: 0.6rem; }
+.dia-footer-brand { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.dia-logo-footer .dia-logo-dia, .dia-logo-footer .dia-logo-sub { color: white; }
+.dia-logo-footer .dia-logo-sub { color: rgba(255,255,255,0.6); }
+.dia-footer-brand p { font-family: var(--dia-fuente-texto); font-size: 0.82rem; margin: 0; max-width: 320px; color: rgba(255,255,255,0.7); }
+.dia-footer-social { display: flex; gap: 0.7rem; }
 .dia-footer-social a {
-  width: 30px; height: 30px;
+  width: 32px; height: 32px;
   border: 1px solid rgba(255,255,255,0.3);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.75rem; font-weight: 700;
+  font-size: 0.78rem; font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
 }
+.dia-footer-social a:hover { border-color: var(--dia-tan); color: var(--dia-tan); }
 .dia-copyright {
   text-align: center;
+  font-family: var(--dia-fuente-texto);
   font-size: 0.75rem;
   color: rgba(255,255,255,0.45);
   border-top: 1px solid rgba(255,255,255,0.12);
-  padding-top: 1.5rem;
+  padding-top: 1.3rem;
   margin: 0;
+  max-width: 1220px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* --- Responsive --- */
-@media (max-width: 900px) {
-  .dia-enfoque-grid { grid-template-columns: repeat(2, 1fr); }
-  .dia-servicios-grid { grid-template-columns: repeat(2, 1fr); }
-  .dia-footer-inner { grid-template-columns: 1fr 1fr; }
-  .dia-experiencia-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+@media (max-width: 980px) {
+  .dia-especialidad-grid { grid-template-columns: repeat(2, 1fr); }
+  .dia-cta-grupo-inner { flex-wrap: wrap; }
+  .dia-cta-grupo-btn { width: 100%; text-align: center; }
+}
+
+@media (max-width: 860px) {
+  .dia-hero { flex-direction: column; }
+  .dia-hero-texto-col { padding: 3rem 1.5rem; }
+  .dia-hero-img-col img { min-height: 220px; }
+  .dia-quienes-somos { flex-direction: column-reverse; }
+  .dia-quienes-somos-texto { padding: 3rem 1.5rem; }
+  .dia-quienes-somos-img { min-height: 220px; }
+  .dia-casos-grid { grid-template-columns: 1fr; }
+  .dia-caso-card { flex-direction: column; }
+  .dia-caso-img { min-height: 160px; }
 }
 
 @media (max-width: 640px) {
@@ -243,10 +288,9 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
     gap: 0.9rem;
     margin-left: 0;
   }
-  .dia-hero h1 { font-size: 1.9rem; }
-  .dia-enfoque-grid { grid-template-columns: 1fr; }
-  .dia-servicios-grid { grid-template-columns: 1fr; }
-  .dia-footer-inner { grid-template-columns: 1fr; }
+  .dia-hero-texto-col h1 { font-size: 1.7rem; }
+  .dia-especialidad-grid { grid-template-columns: 1fr 1fr; }
+  .dia-footer-inner { flex-direction: column; align-items: flex-start; }
 }
 
 /* --- Panel "HABLEMOS": notificación tipo chat, abajo a la derecha --- */
@@ -279,6 +323,7 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
   justify-content: space-between;
   font-weight: 700;
   font-size: 0.9rem;
+  font-family: var(--dia-fuente-texto);
 }
 .panel-hablemos-header button {
   background: none;
@@ -289,13 +334,13 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
   line-height: 1;
   padding: 0.2rem;
 }
-.panel-hablemos-body { padding: 1rem; max-height: 60vh; overflow-y: auto; }
+.panel-hablemos-body { padding: 1rem; max-height: 60vh; overflow-y: auto; font-family: var(--dia-fuente-texto); }
 .panel-hablemos-intro { font-size: 0.85rem; color: var(--dia-gris); margin: 0 0 0.8rem; }
 .panel-hablemos-opcion {
   display: block;
   width: 100%;
   text-align: left;
-  background: var(--dia-bg-claro);
+  background: var(--dia-crema);
   border: 1px solid var(--dia-borde);
   border-radius: 8px;
   padding: 0.7rem 0.9rem;
@@ -305,11 +350,11 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
   color: var(--dia-texto);
   cursor: pointer;
 }
-.panel-hablemos-opcion:hover { border-color: var(--dia-teal); }
+.panel-hablemos-opcion:hover { border-color: var(--dia-tan); }
 .panel-hablemos-volver {
   background: none;
   border: none;
-  color: var(--dia-teal);
+  color: var(--dia-tan-oscuro);
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
@@ -321,36 +366,4 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
 
 @media (max-width: 420px) {
   .panel-hablemos { right: 0.7rem; bottom: 0.7rem; }
-}
-
-/* --- Franja de fotos (misma idea que el brand board: 4 fotos en fila),
-   con "duotono" navy/teal aplicado en CSS para que cualquier foto —
-   venga con los colores que venga— encaje con la paleta de marca. --- */
-.dia-foto-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  height: 260px;
-}
-.dia-foto-strip-item { position: relative; overflow: hidden; }
-.dia-foto-strip-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(100%) contrast(1.05);
-}
-.dia-foto-strip-item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(13, 27, 42, 0.88), rgba(22, 74, 95, 0.72));
-  mix-blend-mode: multiply;
-}
-
-@media (max-width: 900px) {
-  .dia-foto-strip { grid-template-columns: repeat(2, 1fr); height: auto; }
-  .dia-foto-strip-item { height: 200px; }
-}
-@media (max-width: 480px) {
-  .dia-foto-strip { grid-template-columns: 1fr; }
 }
