@@ -180,9 +180,20 @@ h1, h2, h3 { font-family: var(--dia-fuente-titulo); font-weight: 600; line-heigh
   overflow: hidden;
   background: var(--dia-crema);
 }
-.dia-caso-img { min-height: 160px; background-size: cover; background-position: center; }
-.dia-caso-img-1 { background: linear-gradient(135deg, #7c8f7a, #4c5c4a); }
-.dia-caso-img-2 { background: linear-gradient(135deg, #5c7f9e, #2e4c63); }
+.dia-caso-img { position: relative; min-height: 160px; background-size: cover; background-position: center; }
+.dia-caso-img-nota {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  background: rgba(20, 36, 63, 0.75);
+  color: white;
+  font-family: var(--dia-fuente-texto);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
 .dia-caso-texto { padding: 1.4rem 1.6rem 1.6rem; }
 .dia-caso-numero { font-family: var(--dia-fuente-texto); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: var(--dia-tan-oscuro); margin: 0 0 0.4rem; }
 .dia-caso-texto h3 { font-size: 1.2rem; color: var(--dia-navy); margin-bottom: 1rem; }
