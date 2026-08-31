@@ -9,8 +9,10 @@ puede elegir explícitamente su canal preferido.
 Integraciones reales conectadas:
   - WhatsApp: Meta Cloud API (WhatsApp Business Platform) — ver
     `_enviar_whatsapp_texto` / `_enviar_whatsapp_boton`.
-  - Email: Gmail vía SMTP con contraseña de aplicación — ver
-    `_enviar_correo_gmail`.
+  - Email: Resend, por API HTTPS — ver `_enviar_correo_resend`. Se
+    prefiere sobre SMTP porque hostings como Render bloquean el SMTP
+    saliente tradicional; queda además `_enviar_correo_gmail` (SMTP) como
+    alternativa para pruebas en local, sin usarse por defecto.
 
 Activadas solo cuando `NOTIFY_MOCK`/`SMTP_ABOGADO_MOCK` están en "false" Y
 las credenciales correspondientes están configuradas (ver app/config.py);
@@ -19,6 +21,7 @@ en vez de fallar en silencio o simular el envío sin que nadie lo note.
 """
 from __future__ import annotations
 
+import base64
 import hashlib
 import mimetypes
 import os
@@ -30,9 +33,18 @@ from email.message import EmailMessage
 
 import requests
 
-from app.config import GMAIL_APP_PASSWORD, GMAIL_USER, META_PHONE_NUMBER_ID, META_WHATSAPP_TOKEN
+from app.config import (
+    GMAIL_APP_PASSWORD,
+    GMAIL_USER,
+    META_PHONE_NUMBER_ID,
+    META_WHATSAPP_TOKEN,
+    RESEND_API_KEY,
+    RESEND_FROM_EMAIL,
+)
 from app.config import NOTIFY_MOCK as MOCK_MODE
 from app.config import SMTP_ABOGADO_MOCK
+
+RESEND_API_URL = "https://api.resend.com/emails"
 
 META_GRAPH_URL = "https://graph.facebook.com/v20.0"
 
@@ -121,7 +133,47 @@ def enviar_whatsapp_otp(numero_e164: str, codigo: str, nombre: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Correo — Gmail vía SMTP con contraseña de aplicación
+# Correo — Resend (API HTTPS)
+# ---------------------------------------------------------------------------
+
+def _enviar_correo_resend(destinatario: str, asunto: str, cuerpo_texto: str,
+                           adjunto_path: str | None = None, remitente: str | None = None) -> str:
+    """Envía un correo por la API HTTPS de Resend (no SMTP — evita el
+    bloqueo de SMTP saliente de Render y hostings similares). Devuelve el
+    id que Resend asigna al envío. Ver README.md, sección "Probar envíos
+    reales", para cómo crear la cuenta y la API key."""
+    if not RESEND_API_KEY:
+        raise RuntimeError(
+            "Configura RESEND_API_KEY para enviar correo real, "
+            "o deja NOTIFY_MOCK=true / SMTP_ABOGADO_MOCK=true para seguir en modo simulado."
+        )
+    payload = {
+        "from": remitente or RESEND_FROM_EMAIL,
+        "to": [destinatario],
+        "subject": asunto,
+        "text": cuerpo_texto,
+    }
+    if adjunto_path:
+        with open(adjunto_path, "rb") as f:
+            contenido_b64 = base64.b64encode(f.read()).decode()
+        payload["attachments"] = [{
+            "filename": os.path.basename(adjunto_path),
+            "content": contenido_b64,
+        }]
+
+    resp = requests.post(
+        RESEND_API_URL,
+        headers={"Authorization": f"Bearer {RESEND_API_KEY}", "Content-Type": "application/json"},
+        json=payload,
+        timeout=15,
+    )
+    resp.raise_for_status()
+    return resp.json().get("id", "")
+
+
+# ---------------------------------------------------------------------------
+# Correo — Gmail vía SMTP con contraseña de aplicación (alternativa para
+# pruebas en local; no se usa por defecto — ver _enviar_correo_resend)
 # ---------------------------------------------------------------------------
 
 def _enviar_correo_gmail(destinatario: str, asunto: str, cuerpo_texto: str,
@@ -164,7 +216,7 @@ def enviar_email_otp(email: str, codigo: str, nombre: str) -> bool:
     if MOCK_MODE:
         print(f"[MOCK][Email -> {email}] Asunto: {asunto}\n{mensaje}")
         return True
-    _enviar_correo_gmail(email, asunto, mensaje)
+    _enviar_correo_resend(email, asunto, mensaje)
     return True
 
 
@@ -174,7 +226,7 @@ def enviar_copia_firmada(destino_email: str | None, destino_whatsapp: str | None
         print(f"[MOCK] Enviando copia firmada '{pdf_path}' a email={destino_email} whatsapp={destino_whatsapp}")
         return
     if destino_email:
-        _enviar_correo_gmail(
+        _enviar_correo_resend(
             destino_email, "Copia de tu poder especial firmado",
             "Adjunto la copia de tu poder especial ya firmado electrónicamente.",
             adjunto_path=pdf_path,
@@ -204,9 +256,11 @@ def enviar_copia_firmada(destino_email: str | None, destino_whatsapp: str | None
 # propio SMTP corporativo si lo permite) — así cada correo sale técnicamente
 # autenticado COMO el dominio del abogado, cumpliendo el requisito legal, sin
 # depender de la bandeja de un solo buzón personal. Para las PRUEBAS de esta
-# app, Gmail + contraseña de aplicación es suficiente (ver GMAIL_USER en
-# app/config.py) — se usa como remitente "From", aunque el correo del
-# abogado registrado en el caso (`remitente_abogado`) sea otro.
+# app, Resend con su remitente de prueba es suficiente (ver
+# RESEND_FROM_EMAIL en app/config.py) — se usa como remitente "From",
+# aunque el correo del abogado registrado en el caso (`remitente_abogado`)
+# sea otro (Resend, igual que Gmail, no deja usar cualquier "From" sin
+# verificarlo primero).
 
 
 def enviar_derecho_peticion(destino_email: str, asunto: str, cuerpo_texto: str, pdf_path: str,
@@ -223,5 +277,5 @@ def enviar_derecho_peticion(destino_email: str, asunto: str, cuerpo_texto: str, 
               f"Asunto: {asunto}\n    Adjunto: {pdf_path}")
         return {"ok": True, "proveedor_ref": f"<mock-{hashlib.sha256(destino_email.encode()).hexdigest()[:12]}@{remitente_abogado.split('@')[-1]}>"}
 
-    message_id = _enviar_correo_gmail(destino_email, asunto, cuerpo_texto, adjunto_path=pdf_path)
+    message_id = _enviar_correo_resend(destino_email, asunto, cuerpo_texto, adjunto_path=pdf_path)
     return {"ok": True, "proveedor_ref": message_id}

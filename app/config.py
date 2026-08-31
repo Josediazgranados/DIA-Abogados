@@ -46,7 +46,22 @@ REVISION_MANUAL_PRIMERAS_N = int(os.environ.get("REVISION_MANUAL_PRIMERAS_N", "0
 META_WHATSAPP_TOKEN = os.environ.get("META_WHATSAPP_TOKEN", "")
 META_PHONE_NUMBER_ID = os.environ.get("META_PHONE_NUMBER_ID", "")
 
-# Correo — Gmail con contraseña de aplicación (smtp.gmail.com)
+# Correo — Resend (API HTTPS, no SMTP). Se usa este por defecto porque
+# muchos hostings (incluido Render) bloquean o restringen el SMTP saliente
+# tradicional (puerto 465/587) — la API de Resend va por HTTPS normal y no
+# tiene ese problema. "onboarding@resend.dev" es el remitente de prueba que
+# da Resend sin necesidad de verificar dominio (solo permite enviar a la
+# cuenta con la que te registraste, hasta que verifiques un dominio propio).
+# Ver README.md, sección "Probar envíos reales".
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+# "or" (no ".get(..., default)") a propósito: si la variable existe pero
+# vacía (ej. "RESEND_FROM_EMAIL=" en el .env), os.environ.get devolvería
+# "" en vez del default — con "or" cae al remitente de prueba en ambos casos.
+RESEND_FROM_EMAIL = os.environ.get("RESEND_FROM_EMAIL") or "onboarding@resend.dev"
+
+# Correo — Gmail con contraseña de aplicación (smtp.gmail.com). Alternativa
+# por SMTP directo: funciona en local, pero Render (y hostings similares)
+# bloquea ese tráfico saliente — usar SendGrid arriba para producción.
 GMAIL_USER = os.environ.get("GMAIL_USER", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
 

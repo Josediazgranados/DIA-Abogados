@@ -157,23 +157,37 @@ configurar dos proveedores:
    modo desarrollo). Agrega ahí tu propio celular para poder recibir los
    mensajes de prueba.
 
-### 2. Correo — Gmail con contraseña de aplicación
+### 2. Correo — Resend (API HTTPS)
 
-1. En tu cuenta de Gmail, activa la verificación en dos pasos si no la
-   tienes (Configuración de la cuenta de Google → Seguridad).
-2. Ve a [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords),
-   crea una contraseña de aplicación nueva (ponle un nombre como "DIA
-   Abogados") y copia el código de 16 letras que te da — **esa** es
-   `GMAIL_APP_PASSWORD` (no la contraseña normal de tu cuenta).
-3. `GMAIL_USER` es tu dirección de Gmail completa.
+Se usa Resend en vez de SMTP/Gmail porque **Render (y hostings similares)
+bloquean el SMTP saliente tradicional** — con una API HTTPS normal ese
+bloqueo no aplica.
+
+1. Crea una cuenta gratis en [resend.com/signup](https://resend.com/signup).
+2. Ve a **API Keys** → **Create API Key** → dale acceso completo y copia la
+   clave — esa es `RESEND_API_KEY`.
+3. Para pruebas, no hace falta verificar un dominio propio: deja
+   `RESEND_FROM_EMAIL` vacío y el proyecto usa automáticamente el remitente
+   de prueba `onboarding@resend.dev` (con la limitación de que solo puede
+   enviar a la cuenta de correo con la que te registraste en Resend). Para
+   producción real, verifica tu propio dominio en Resend y pon esa
+   dirección en `RESEND_FROM_EMAIL`.
+
+Alternativa para pruebas rápidas en **local** solamente (no funciona en
+Render): configurar `GMAIL_USER` y `GMAIL_APP_PASSWORD` (contraseña de
+aplicación, generada en
+[myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords))
+y cambiar la llamada en `app/services/notify.py` de `_enviar_correo_resend`
+a `_enviar_correo_gmail` — la función ya existe, solo no se usa por
+defecto.
 
 ### 3. Configurar las credenciales
 
 **En Render** (para probar en el link público): panel del servicio →
 pestaña **"Environment"** → agrega `META_WHATSAPP_TOKEN`,
-`META_PHONE_NUMBER_ID`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, y cambia
-`NOTIFY_MOCK` y `SMTP_ABOGADO_MOCK` a `false`. Guarda — Render redespliega
-solo con las nuevas variables.
+`META_PHONE_NUMBER_ID`, `RESEND_API_KEY` (y `RESEND_FROM_EMAIL` si ya
+tienes dominio verificado), y cambia `NOTIFY_MOCK` y `SMTP_ABOGADO_MOCK` a
+`false`. Guarda — Render redespliega solo con las nuevas variables.
 
 **En local** (para probar antes de subir cambios): copia `.env.example` a
 `.env` en la raíz del proyecto, llena esos mismos valores, y pon
@@ -183,8 +197,7 @@ automáticamente al iniciar (no hace falta exportar nada a mano).
 **Nunca subas el archivo `.env` a GitHub** (ya está en `.gitignore`) ni
 compartas esas credenciales — quien las tenga puede enviar WhatsApp/correo
 en tu nombre. Si crees que se filtraron, revócalas desde Meta for
-Developers / desde `myaccount.google.com/apppasswords` y genera unas
-nuevas.
+Developers / desde el panel de Resend (API Keys) y genera unas nuevas.
 
 ## Estructura
 
