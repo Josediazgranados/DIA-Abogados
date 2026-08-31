@@ -207,6 +207,10 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
 .dia-caso-link { color: var(--dia-teal); text-decoration: none; font-size: 0.85rem; font-weight: 700; }
 .dia-caso-link:hover { text-decoration: underline; }
 
+/* --- Blog (espacio reservado hasta que haya artículos) --- */
+.dia-blog { background: var(--dia-bg-claro); padding: 4rem 1.5rem; }
+.dia-blog h2 { font-size: 1.6rem; color: var(--dia-navy); margin-bottom: 0.8rem; }
+
 /* --- CTA acción de grupo --- */
 .dia-cta-grupo { background: var(--dia-navy); padding: 3rem 1.5rem; }
 .dia-cta-grupo-inner {
@@ -249,6 +253,7 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
   text-decoration: none;
 }
 .dia-footer-social a:hover { border-color: var(--dia-teal-light); color: var(--dia-teal-light); }
+.dia-icono-social { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .dia-copyright {
   text-align: center;
   font-size: 0.75rem;
