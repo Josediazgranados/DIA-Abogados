@@ -34,8 +34,8 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
 }
 
 /* --- Logo (marca tipográfica: "DIA" + subtítulo apilado) --- */
-.dia-logo { display: flex; align-items: baseline; gap: 0.6rem; text-decoration: none; color: var(--dia-navy); }
-.dia-logo-dia { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.02em; }
+.dia-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--dia-navy); }
+.dia-logo-img { height: 34px; width: auto; display: block; }
 .dia-logo-sub { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em; line-height: 1.35; color: var(--dia-gris); }
 
 /* --- Navegación --- */
@@ -236,7 +236,6 @@ h1, h2, h3 { font-weight: 600; line-height: 1.25; margin: 0; }
   flex-wrap: wrap;
 }
 .dia-footer-brand { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
-.dia-logo-footer .dia-logo-dia, .dia-logo-footer .dia-logo-sub { color: white; }
 .dia-logo-footer .dia-logo-sub { color: rgba(255,255,255,0.6); }
 .dia-footer-brand p { font-size: 0.82rem; margin: 0; max-width: 320px; color: rgba(255,255,255,0.7); }
 .dia-footer-social { display: flex; gap: 0.7rem; }
