@@ -1,0 +1,4 @@
+# Sitio en construcción — no indexar todavía. Quitar/editar este archivo
+# cuando la página quede lista para lanzarse públicamente.
+User-agent: *
+Disallow: /
